@@ -3,6 +3,7 @@
 #include <random>
 #include <cmath>
 #include <fstream>
+#include <filesystem>
 
 int main() {
     UKF ukf;
@@ -21,7 +22,8 @@ int main() {
     std::cout << "Step | True Pos (m)       | Est Pos (m)        | Error (mm)\n";
     std::cout << "---------------------------------------------------------------\n";
 
-    std::ofstream csv("/home/ubuntu/code/ukf/output/ukf_results.csv");
+    std::filesystem::create_directories("./output");
+    std::ofstream csv("./output/ukf_results.csv");
     csv << "step,true_x,true_y,true_z,est_x,est_y,est_z,error_mm\n";
 
     for (int step = 0; step < 100; ++step) {
@@ -44,10 +46,10 @@ int main() {
         double error_mm = (est - true_pos).norm() * 1000.0;
 
         printf("%4d | [%5.2f,%5.2f,%5.2f] | [%5.2f,%5.2f,%5.2f] | %7.2f\n",
-               step,
-               true_pos.x(), true_pos.y(), true_pos.z(),
-               est.x(), est.y(), est.z(),
-               error_mm);
+            step,
+            true_pos.x(), true_pos.y(), true_pos.z(),
+            est.x(), est.y(), est.z(),
+            error_mm);
 
         csv << step << ","
             << true_pos.x() << "," << true_pos.y() << "," << true_pos.z() << ","

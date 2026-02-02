@@ -64,3 +64,5 @@ bin/
 *.swp
 *.swo
 *~
+
+output/

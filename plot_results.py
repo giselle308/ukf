@@ -3,7 +3,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
-csv_path = Path("/home/ubuntu/code/ukf/output/ukf_results.csv")
+csv_path = Path("./output/ukf_results.csv")
 if not csv_path.exists():
     raise FileNotFoundError(f"CSV not found: {csv_path}")
 
@@ -47,7 +47,7 @@ axes[1].grid(True, alpha=0.3)
 axes[1].legend()
 
 fig.suptitle("UKF Position Tracking")
-output_path = Path("/home/ubuntu/code/ukf/output/ukf_results.png")
+output_path = Path("./output/ukf_results.png")
 fig.tight_layout(rect=[0, 0, 1, 0.96])
 fig.savefig(output_path, dpi=150)
 print(f"Saved plot: {output_path}")
